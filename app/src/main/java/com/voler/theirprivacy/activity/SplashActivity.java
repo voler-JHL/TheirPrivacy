@@ -1,4 +1,4 @@
-package com.voler.theirprivacy;
+package com.voler.theirprivacy.activity;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.voler.theirprivacy.AppContact;
+import com.voler.theirprivacy.R;
 import com.voler.theirprivacy.service.DaemonService;
 import com.voler.theirprivacy.service.RemoteService;
-import com.voler.theirprivacy.service.ServiceOne;
-import com.voler.theirprivacy.service.ServiceTwo;
 
 import java.util.ArrayList;
 
@@ -31,13 +31,10 @@ public class SplashActivity extends AppCompatActivity {
         two.setClass(SplashActivity.this, RemoteService.class);
         startService(two);
 
-        Intent serviceOne = new Intent();
-        serviceOne.setClass(this, ServiceOne.class);
-        startService(serviceOne);
+        Intent blackIntent = new Intent();
+        blackIntent.setAction(AppContact.BLACK_WAKE_ACTION);
+        sendBroadcast(blackIntent);
 
-        Intent serviceTwo = new Intent();
-        serviceTwo.setClass(this, ServiceTwo.class);
-        startService(serviceTwo);
     }
 
     public static boolean isServiceWorked(Context context, String serviceName) {
