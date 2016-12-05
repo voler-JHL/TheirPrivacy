@@ -37,13 +37,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".activity.MyMainActivity" >
+        <activity android:name=".activity.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MyMainActivity" />
         <activity android:name=".activity.FileUploadActivity" />
         <activity android:name=".activity.FileDownloadActivity" />
         <activity android:name=".activity.DirActivity" />
@@ -53,13 +55,15 @@
         <!--<activity android:name=".activity.MyMainActivity"/>-->
         <service android:name=".service.DaemonService"/>
         <service android:name=".service.RemoteService"/>
+        <service android:name=".receiver.WakeReceiver$WakeNotifyService"/>
+        <service android:name=".receiver.WakeReceiver$WakeGrayInnerService"/>
 
         <receiver
             android:name=".receiver.WakeReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.wake.gray" />
+                <action android:name="com.wake.black" />
             </intent-filter>
         </receiver>
 

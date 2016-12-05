@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.voler.theirprivacy.AppContact;
 import com.voler.theirprivacy.IProcessService;
 
 /**
@@ -83,6 +84,9 @@ public class RemoteService extends Service {
             // RemoteException连接过程出现的异常，才会回调,unbind不会回调
 
             startService(new Intent(RemoteService.this, DaemonService.class));
+            Intent blackIntent = new Intent();
+            blackIntent.setAction(AppContact.BLACK_WAKE_ACTION);
+            sendBroadcast(blackIntent);
 
             bindService(new Intent(RemoteService.this, DaemonService.class), mRemoteServiceConn, Context.BIND_IMPORTANT);
         }

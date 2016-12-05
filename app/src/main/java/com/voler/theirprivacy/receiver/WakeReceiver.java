@@ -9,20 +9,18 @@ import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.voler.theirprivacy.AppContact;
+
 public class WakeReceiver extends BroadcastReceiver {
 
     private final static String TAG = WakeReceiver.class.getSimpleName();
     private final static int WAKE_SERVICE_ID = -1111;
 
-    /**
-     * 灰色保活手段唤醒广播的action
-     */
-    public final static String GRAY_WAKE_ACTION = "com.wake.gray";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        if (GRAY_WAKE_ACTION.equals(action)) {
+        if (AppContact.BLACK_WAKE_ACTION.equals(action)) {
             Log.i(TAG, "wake !! wake !! ");
 
             Intent wakeIntent = new Intent(context, WakeNotifyService.class);

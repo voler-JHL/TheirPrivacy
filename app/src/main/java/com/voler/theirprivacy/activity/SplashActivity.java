@@ -35,6 +35,7 @@ public class SplashActivity extends AppCompatActivity {
         blackIntent.setAction(AppContact.BLACK_WAKE_ACTION);
         sendBroadcast(blackIntent);
 
+        startActivity(new Intent(SplashActivity.this,MyMainActivity.class));
     }
 
     public static boolean isServiceWorked(Context context, String serviceName) {
