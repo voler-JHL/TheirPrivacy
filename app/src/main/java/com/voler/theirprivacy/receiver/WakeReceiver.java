@@ -37,6 +37,8 @@ public class WakeReceiver extends BroadcastReceiver {
         public void onCreate() {
             Log.i(TAG, "WakeNotifyService->onCreate");
             super.onCreate();
+
+            //dosomething
         }
 
         @Override

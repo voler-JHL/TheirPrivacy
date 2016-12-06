@@ -35,8 +35,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.1.0'
     testCompile 'junit:junit:4.12'
-
     compile files('libs/cos-sdk-android-1.4.2.jar')
-
     compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    compile files('src/main/jniLibs/pushservice-5.0.0.66.jar')
 }

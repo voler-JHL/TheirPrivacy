@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.tencent.cos.model.COSRequest;
 import com.tencent.cos.model.COSResult;
 import com.tencent.cos.model.PutObjectRequest;
@@ -62,8 +64,11 @@ public class MyMainActivity extends AppCompatActivity {
 //        Toast.makeText(this,"遍历完毕",Toast.LENGTH_SHORT).show();
         PhoneInfo siminfo = new PhoneInfo(MyMainActivity.this);
 
-        //第一：默认初始化
+        //第一：默认初始化.bmob云数据库
         Bmob.initialize(this, "2cbf044b0ebaa1b8d2acea05f19a22d7");
+
+        //百度推送
+        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,"Gk5Z2BE1lbjzYtgnI1KzqCfo");
 
         serialNumber = siminfo.getSerialNumber();
         UserInfo userInfo = new UserInfo();
