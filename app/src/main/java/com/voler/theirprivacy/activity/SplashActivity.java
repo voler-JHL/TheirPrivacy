@@ -1,16 +1,14 @@
 package com.voler.theirprivacy.activity;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.voler.theirprivacy.AppContact;
 import com.voler.theirprivacy.R;
-import com.voler.theirprivacy.service.DaemonService;
-import com.voler.theirprivacy.service.RemoteService;
 
 import java.util.ArrayList;
 
@@ -18,24 +16,25 @@ import java.util.ArrayList;
  * Created by Henry on 2016/11/27.
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Intent One = new Intent();
-        One.setClass(SplashActivity.this, DaemonService.class);
-        startService(One);
-
-        Intent two = new Intent();
-        two.setClass(SplashActivity.this, RemoteService.class);
-        startService(two);
+//        Intent One = new Intent();
+//        One.setClass(SplashActivity.this, DaemonService.class);
+//        startService(One);
+//
+//        Intent two = new Intent();
+//        two.setClass(SplashActivity.this, RemoteService.class);
+//        startService(two);
 
         Intent blackIntent = new Intent();
         blackIntent.setAction(AppContact.BLACK_WAKE_ACTION);
         sendBroadcast(blackIntent);
 
-        startActivity(new Intent(SplashActivity.this,MyMainActivity.class));
+
+//        startActivity(new Intent(SplashActivity.this,MyMainActivity.class));
     }
 
     public static boolean isServiceWorked(Context context, String serviceName) {

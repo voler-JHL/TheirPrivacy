@@ -51,7 +51,7 @@ public class Sign {
         config = new COSClientConfig();
         cosEndPoint = COSEndPoint.COS_TJ;
         config.setEndPoint(cosEndPoint);
-        cos = new COSClient(context, appid, config, ""+System.currentTimeMillis());
+        cos = new COSClient(context, appid, config, "" + System.currentTimeMillis());
     }
 
     public static Sign getInstance(Context context) {
@@ -76,7 +76,7 @@ public class Sign {
      * 签名，此处使用多次签名
      */
     public String getSign() {
-        String original = "a=" + appid + "&b=" + bucket + "&k=" + secretId + "&e=" + System.currentTimeMillis() / 1000 + "&t=770000&r=" + rand() + "&f=";
+        String original = "a=" + appid + "&b=" + bucket + "&k=" + secretId + "&e=" + (System.currentTimeMillis() / 1000 + 770000) + "&t=" + System.currentTimeMillis() / 1000 + "&r=" + rand() + "&f=";
         String sign = "";
         try {
             byte[] hmacDigest = HMACSHA1.HmacSHA1Encrypt(original, secretKey);

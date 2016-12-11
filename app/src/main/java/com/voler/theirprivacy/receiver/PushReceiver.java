@@ -57,28 +57,6 @@ public class PushReceiver extends PushMessageReceiver {
     public void onMessage(Context context, String s, String s1) {
 
         Log.i("push","onmessage:"+s);
-        /*if (s != null && s != "") {
-            int a = 0;
-            switch (a) {
-                case 0:
-                    //问询消息
-                    // 存储最新消息到本地
-                    UserManager.setMsg(s, "0");
-                    break;
-                case 1:
-                    //评价消息
-                    break;
-                case 2:
-                    //订单消息
-                    break;
-                case 3:
-                    //通知消息
-                    break;
-
-                default:
-                    break;
-            }
-        }*/
 
     }
 
