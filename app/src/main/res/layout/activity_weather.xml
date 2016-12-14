@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/alis_blue"
+            android:orientation="vertical">
+
+
+            "now": { //实况天气
+            "cond": { //天气状况
+            "code": "100", //天气状况代码
+            "txt": "晴" //天气状况描述
+            },
+            "fl": "30", //体感温度
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="实况天气"
+                android:textColor="@color/black_title_text"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/d_q_l"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_cond"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="40dp"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <TextView
+                        android:id="@+id/tv_cond"
+                        style="@style/text_center_black"
+                        android:layout_marginTop="12dp"
+                        android:text="qing" />
+
+                    <TextView
+                        android:id="@+id/tv_tmp"
+                        style="@style/text_center_black"
+                        android:layout_marginTop="12dp"
+                        android:text="fds" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/y_h_z"
+                    android:orientation="vertical">
+
+                    "hum": "20%", //相对湿度（%）
+                    "pcpn": "0.0", //降水量（mm）
+                    "pres": "1001", //气压
+                    "tmp": "32", //温度
+                    "vis": "10", //能见度（km）
+                    "wind": { //风力风向
+                    "deg": "10", //风向（360度）
+                    "dir": "北风", //风向
+                    "sc": "3级", //风力
+                    "spd": "15" //风速（kmph）
+                    }
+                    },
+
+                    <TextView
+                        android:id="@+id/tv_fl"
+                        style="@style/text_center_black"
+                        android:paddingTop="8dp"
+                        android:text="nisfhksalfjka" />
+
+                    <TextView
+                        android:id="@+id/tv_hum"
+                        style="@style/text_center_black"
+                        android:paddingTop="8dp"
+                        android:text="nisfhksalfjka" />
+
+                    <TextView
+                        android:id="@+id/tv_pcpn"
+                        style="@style/text_center_black"
+                        android:paddingTop="8dp"
+                        android:text="nisfhksalfjka" />
+
+                    <TextView
+                        android:id="@+id/tv_pres"
+                        style="@style/text_center_black"
+                        android:paddingTop="8dp"
+                        android:text="nisfhksalfjka" />
+
+                    <TextView
+                        android:id="@+id/tv_vis"
+                        style="@style/text_center_black"
+                        android:paddingTop="8dp"
+                        android:text="nisfhksalfjka" />
+
+                    <TextView
+                        android:id="@+id/tv_dir"
+                        style="@style/text_center_black"
+                        android:paddingTop="8dp"
+                        android:text="nisfhksalfjka" />
+
+                    <TextView
+                        android:id="@+id/tv_sc"
+                        style="@style/text_center_black"
+                        android:paddingTop="8dp"
+                        android:text="nisfhksalfjka" />
+
+                    <TextView
+                        android:id="@+id/tv_spd"
+                        style="@style/text_center_black"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:text="nisfhksalfjka" />
+
+                </LinearLayout>
+            </LinearLayout>
+            "suggestion": { //生活指数，仅限国内城市，国际城市无此字段
+            "comf": { //舒适度指数
+            "brf": "较不舒适", //简介
+            "txt": "白天天气多云，同时会感到有些热，不很舒适。" //详细描述
+            },
+            "cw": { //洗车指数
+            "brf": "较适宜",
+            "txt": "较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。"
+            },
+            "drsg": { //穿衣指数
+            "brf": "炎热",
+            "txt": "天气炎热，建议着短衫、短裙、短裤、薄型T恤衫等清凉夏季服装。"
+            },
+            "flu": { //感冒指数
+            "brf": "少发",
+            "txt": "各项气象条件适宜，发生感冒机率较低。但请避免长期处于空调房间中，以防感冒。"
+            },
+            "sport": { //运动指数
+            "brf": "较适宜",
+            "txt": "天气较好，户外运动请注意防晒。推荐您进行室内运动。"
+            },
+            "trav": { //旅游指数
+            "brf": "较适宜",
+            "txt": "天气较好，温度较高，天气较热，但有微风相伴，还是比较适宜旅游的，不过外出时要注意防暑防晒哦！"
+            },
+            "uv": { //紫外线指数
+            "brf": "中等",
+            "txt": "属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。"
+            }
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    style="@style/text_title_center_black"
+                    android:text="舒适指数：" />
+
+                <TextView
+                    android:id="@+id/tv_comf_brf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="较不舒适"
+                    android:textColor="@color/black_text"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_comf_brf"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="3dp"
+                    android:padding="6dp"
+                    android:src="@mipmap/arrow_up" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_comf_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="20dp"
+                android:paddingTop="8dp"
+                android:text="fjdsklafjdlak"
+                android:textColor="@color/black_text"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    style="@style/text_title_center_black"
+                    android:text="洗车指数：" />
+
+                <TextView
+                    android:id="@+id/tv_cw_brf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="较不舒适"
+                    android:textColor="@color/black_text"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_cw_brf"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="3dp"
+                    android:padding="6dp"
+                    android:src="@mipmap/arrow_up" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_cw_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="20dp"
+                android:paddingTop="8dp"
+                android:textColor="@color/black_text"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    style="@style/text_title_center_black"
+                    android:text="穿衣指数：" />
+
+                <TextView
+                    android:id="@+id/tv_drsg_brf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="较不舒适"
+                    android:textColor="@color/black_text"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_drsg_brf"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="3dp"
+                    android:padding="6dp"
+                    android:src="@mipmap/arrow_up" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_drsg_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="20dp"
+                android:paddingTop="8dp"
+                android:text="fjdsklafjdlak"
+                android:textColor="@color/black_text"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    style="@style/text_title_center_black"
+                    android:text="感冒指数：" />
+
+                <TextView
+                    android:id="@+id/tv_flu_brf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="较不舒适"
+                    android:textColor="@color/black_text"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_flu_brf"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="3dp"
+                    android:padding="6dp"
+                    android:src="@mipmap/arrow_up" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_flu_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="20dp"
+                android:paddingTop="8dp"
+                android:text="fjdsklafjdlak"
+                android:textColor="@color/black_text"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    style="@style/text_title_center_black"
+                    android:text="运动指数：" />
+
+                <TextView
+                    android:id="@+id/tv_sport_brf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="较不舒适"
+                    android:textColor="@color/black_text"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_sport_brf"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="3dp"
+                    android:padding="6dp"
+                    android:src="@mipmap/arrow_up" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_sport_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="20dp"
+                android:paddingTop="8dp"
+                android:textColor="@color/black_text"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    style="@style/text_title_center_black"
+                    android:text="旅游指数：" />
+
+                <TextView
+                    android:id="@+id/tv_trav_brf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="较不舒适"
+                    android:textColor="@color/black_text"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_trav_brf"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="3dp"
+                    android:padding="6dp"
+                    android:src="@mipmap/arrow_up" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_trav_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="20dp"
+                android:paddingTop="8dp"
+                android:text="fjdsklafjdlak"
+                android:textColor="@color/black_text"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <com.voler.theirprivacy.widget.MyListView
+                android:id="@+id/lv_daily_forecast"
+                style="@style/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:background="@color/pink"></com.voler.theirprivacy.widget.MyListView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -8,4 +8,33 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="text_center_black" >
+        <item name="android:textColor">@color/black_text</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">18sp</item>
+</style>
+
+    <style name="text_title_center_black">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black_title_text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+    <!-- ListView统一样式 -->
+    <style name="list_view">
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:dividerHeight">1px</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:fadingEdge">none</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="android:scrollbars">none</item>
+    </style>
 </resources>

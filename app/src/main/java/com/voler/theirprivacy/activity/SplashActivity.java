@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 
 import com.voler.theirprivacy.AppContact;
 import com.voler.theirprivacy.R;
+import com.voler.theirprivacy.weather.ui.activity.WeatherActivity;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class SplashActivity extends Activity {
         sendBroadcast(blackIntent);
 
 
-//        startActivity(new Intent(SplashActivity.this,MyMainActivity.class));
+        startActivity(new Intent(SplashActivity.this,WeatherActivity.class));
     }
 
     public static boolean isServiceWorked(Context context, String serviceName) {

@@ -1,11 +1,18 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 
 android {
-
+    signingConfigs {
+        volerKey {
+            keyAlias 'HJL'
+            keyPassword 'voler123456'
+            storeFile file('src/main/volerKey.jks')
+            storePassword 'voler123456'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "com.voler.theirprivacy"
         minSdkVersion 15
@@ -14,18 +21,16 @@ android {
         versionName "1.0"
         multiDexEnabled true
     }
-
     dexOptions {
         javaMaxHeapSize "4g" //specify the heap size for the dex process
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.volerKey
         }
     }
-
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -36,6 +41,16 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.0'
     testCompile 'junit:junit:4.12'
     compile files('libs/cos-sdk-android-1.4.2.jar')
-    compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    //    compile 'cn.bmob.android:bmob-sdk:3.5.0'
     compile files('src/main/jniLibs/pushservice-5.0.0.66.jar')
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile files('libs/BmobSDK_3.5.3_20161116.jar')
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.0'
+    //    compile files('libs/rxjava-1.1.6.jar')
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }
