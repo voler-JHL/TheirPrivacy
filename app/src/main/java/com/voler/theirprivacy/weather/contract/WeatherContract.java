@@ -1,5 +1,6 @@
 package com.voler.theirprivacy.weather.contract;
 
+import com.voler.theirprivacy.weather.model.entity.AddressEntity;
 import com.voler.theirprivacy.weather.model.entity.WeatherEntity;
 
 import rx.Observable;
@@ -11,15 +12,19 @@ import rx.Observable;
  */
 
 public interface WeatherContract {
-    interface View  extends BaseContract.View {
+    interface View extends BaseContract.View {
         void showWeather(WeatherEntity weatherEntity);
     }
 
-    interface Model extends BaseContract.Model{
+    interface Model extends BaseContract.Model {
         Observable<WeatherEntity> requestWeather(String city);
+
+        Observable<AddressEntity> requestAddress();
     }
 
-    interface Presenter extends BaseContract.Presenter{
+    interface Presenter extends BaseContract.Presenter {
         void requestWeather(String city);
+
+        void requestAddress();
     }
 }

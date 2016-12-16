@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.voler.theirprivacy.weather.contract.WeatherContract;
 import com.voler.theirprivacy.weather.model.WeatherModel;
+import com.voler.theirprivacy.weather.model.entity.AddressEntity;
 import com.voler.theirprivacy.weather.model.entity.WeatherEntity;
 
 import rx.Subscriber;
@@ -58,5 +59,29 @@ public class WeatherPresenter implements WeatherContract.Presenter {
             }
         });
 
+    }
+
+    @Override
+    public void requestAddress() {
+        model.requestAddress().subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<AddressEntity>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(AddressEntity addressEntity) {
+                        String address = addressEntity.getContent().getAddress_detail().getCity();
+                        requestWeather(address.replaceAll("市", ""));
+                    }
+                });
     }
 }

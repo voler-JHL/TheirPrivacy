@@ -59,13 +59,13 @@
                         android:id="@+id/tv_cond"
                         style="@style/text_center_black"
                         android:layout_marginTop="12dp"
-                        android:text="qing" />
+                        android:text="多云" />
 
                     <TextView
                         android:id="@+id/tv_tmp"
                         style="@style/text_center_black"
                         android:layout_marginTop="12dp"
-                        android:text="fds" />
+                        android:text="" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -92,50 +92,50 @@
                         android:id="@+id/tv_fl"
                         style="@style/text_center_black"
                         android:paddingTop="8dp"
-                        android:text="nisfhksalfjka" />
+                        android:text="体感温度" />
 
                     <TextView
                         android:id="@+id/tv_hum"
                         style="@style/text_center_black"
                         android:paddingTop="8dp"
-                        android:text="nisfhksalfjka" />
+                        android:text="相对湿度" />
 
                     <TextView
                         android:id="@+id/tv_pcpn"
                         style="@style/text_center_black"
                         android:paddingTop="8dp"
-                        android:text="nisfhksalfjka" />
+                        android:text="降水量" />
 
                     <TextView
                         android:id="@+id/tv_pres"
                         style="@style/text_center_black"
                         android:paddingTop="8dp"
-                        android:text="nisfhksalfjka" />
+                        android:text="气压" />
 
                     <TextView
                         android:id="@+id/tv_vis"
                         style="@style/text_center_black"
                         android:paddingTop="8dp"
-                        android:text="nisfhksalfjka" />
+                        android:text="能见度" />
 
                     <TextView
                         android:id="@+id/tv_dir"
                         style="@style/text_center_black"
                         android:paddingTop="8dp"
-                        android:text="nisfhksalfjka" />
+                        android:text="风向" />
 
                     <TextView
                         android:id="@+id/tv_sc"
                         style="@style/text_center_black"
                         android:paddingTop="8dp"
-                        android:text="nisfhksalfjka" />
+                        android:text="风力" />
 
                     <TextView
                         android:id="@+id/tv_spd"
                         style="@style/text_center_black"
                         android:paddingBottom="8dp"
                         android:paddingTop="8dp"
-                        android:text="nisfhksalfjka" />
+                        android:text="风速" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -185,7 +185,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="较不舒适"
+                    android:text=""
                     android:textColor="@color/black_text"
                     android:textSize="18sp" />
 
@@ -226,7 +226,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="较不舒适"
+                    android:text=""
                     android:textColor="@color/black_text"
                     android:textSize="18sp" />
 
@@ -266,7 +266,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="较不舒适"
+                    android:text=""
                     android:textColor="@color/black_text"
                     android:textSize="18sp" />
 
@@ -307,7 +307,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="较不舒适"
+                    android:text=""
                     android:textColor="@color/black_text"
                     android:textSize="18sp" />
 
@@ -348,7 +348,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="较不舒适"
+                    android:text=""
                     android:textColor="@color/black_text"
                     android:textSize="18sp" />
 
@@ -388,7 +388,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="较不舒适"
+                    android:text=""
                     android:textColor="@color/black_text"
                     android:textSize="18sp" />
 

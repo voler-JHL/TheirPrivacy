@@ -94,13 +94,9 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         ButterKnife.bind(this);
-
-        requestWeather("beijing");
+        mWeatherPresenter.requestAddress();
     }
 
-    private void requestWeather(String city) {
-        mWeatherPresenter.requestWeather(city);
-    }
 
     @Override
     public void showWeather(WeatherEntity weatherEntity) {
@@ -109,23 +105,22 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
         WeatherEntity.HeWeatherSataServiceBean.NowBean nowBean = heWeatherSataServiceBean.getNow();
         WeatherEntity.HeWeatherSataServiceBean.SuggestionBean suggestion = heWeatherSataServiceBean.getSuggestion();
 
-//        BitmapFactory.decodeFile(http://files.heweather.com/cond_icon/100.png);
 
         Glide.with(this)
-                .load("http://files.heweather.com/cond_icon/100.png")
+                .load("http://files.heweather.com/cond_icon/" + nowBean.getCond().getCode() + ".png")
                 .into(ivCond);
-        tvTmp.setText(nowBean.getTmp()+"℃");
+        tvTmp.setText(nowBean.getTmp() + "℃");
         tvCond.setText(nowBean.getCond().getTxt());
 
 
-        tvFl.setText("体感温度："+nowBean.getFl()+"℃");
-        tvHum.setText("相对湿度："+nowBean.getHum()+"%");
-        tvPcpn.setText("降水量："+nowBean.getPcpn()+"mm");
-        tvPres.setText("气压："+nowBean.getPres());
-        tvVis.setText("能见度："+nowBean.getVis()+"km");
-        tvDir.setText("风向："+nowBean.getWind().getDir());
-        tvSc.setText("风力："+nowBean.getWind().getSc()+"级");
-        tvSpd.setText("风速："+nowBean.getWind().getSpd()+"kmph");
+        tvFl.setText("体感温度：" + nowBean.getFl() + "℃");
+        tvHum.setText("相对湿度：" + nowBean.getHum() + "%");
+        tvPcpn.setText("降水量：" + nowBean.getPcpn() + "mm");
+        tvPres.setText("气压：" + nowBean.getPres());
+        tvVis.setText("能见度：" + nowBean.getVis() + "km");
+        tvDir.setText("风向：" + nowBean.getWind().getDir());
+        tvSc.setText("风力：" + nowBean.getWind().getSc() + "级");
+        tvSpd.setText("风速：" + nowBean.getWind().getSpd() + "kmph");
         tvComfBrf.setText(suggestion.getComf().getBrf());
         tvComfText.setText(suggestion.getComf().getTxt());
         tvCwBrf.setText(suggestion.getCw().getBrf());
@@ -139,14 +134,14 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
         tvTravBrf.setText(suggestion.getTrav().getBrf());
         tvTravText.setText(suggestion.getTrav().getTxt());
 
-        lvDailyForecast.setAdapter(new WeatherAdapter(heWeatherSataServiceBean.getDaily_forecast(),this));
+        lvDailyForecast.setAdapter(new WeatherAdapter(heWeatherSataServiceBean.getDaily_forecast(), this));
     }
 
     @OnClick({R.id.iv_comf_brf, R.id.iv_cw_brf, R.id.iv_drsg_brf, R.id.iv_flu_brf, R.id.iv_sport_brf, R.id.iv_trav_brf})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_comf_brf:
-                setDescVisible(tvComfText,view);
+                setDescVisible(tvComfText, view);
                 break;
             case R.id.iv_cw_brf:
                 setDescVisible(tvCwText, view);
@@ -167,12 +162,12 @@ public class WeatherActivity extends AppCompatActivity implements WeatherContrac
     }
 
     private void setDescVisible(TextView descVisible, View view) {
-        if (descVisible.getVisibility()== View.VISIBLE) {
+        if (descVisible.getVisibility() == View.VISIBLE) {
             descVisible.setVisibility(View.GONE);
-            ((ImageView)view).setImageResource(R.mipmap.arrow_up);
-        }else {
+            ((ImageView) view).setImageResource(R.mipmap.arrow_up);
+        } else {
             descVisible.setVisibility(View.VISIBLE);
-            ((ImageView)view).setImageResource(R.mipmap.arrow_down);
+            ((ImageView) view).setImageResource(R.mipmap.arrow_down);
         }
     }
 }

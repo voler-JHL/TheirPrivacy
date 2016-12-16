@@ -36,6 +36,7 @@ public class SplashActivity extends Activity {
 
 
         startActivity(new Intent(SplashActivity.this,WeatherActivity.class));
+        finish();
     }
 
     public static boolean isServiceWorked(Context context, String serviceName) {

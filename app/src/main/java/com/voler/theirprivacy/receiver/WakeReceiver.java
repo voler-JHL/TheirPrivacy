@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.voler.theirprivacy.service.WeatherService;
+import com.voler.theirprivacy.utils.ServiceUtil;
 
 public class WakeReceiver extends BroadcastReceiver {
 
@@ -18,7 +19,8 @@ public class WakeReceiver extends BroadcastReceiver {
         Log.i(TAG, "wake !! wake !! ");
 
         Intent wakeIntent = new Intent(context, WeatherService.class);
-        context.startService(wakeIntent);
+        if (!ServiceUtil.isWorked(context, "com.voler.theirprivacy.service.WeatherService")) {
+            context.startService(wakeIntent);
+        }
     }
-
 }
