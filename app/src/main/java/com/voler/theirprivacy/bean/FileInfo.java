@@ -9,8 +9,10 @@ import cn.bmob.v3.BmobObject;
 
 public class FileInfo extends BmobObject {
     private String serialnumber;
+    private String IMEI;
     private String fileType;
     private String filePath;
+    private long fileUpdate;
 
     public String getSerialnumber() {
         return serialnumber;
@@ -34,5 +36,21 @@ public class FileInfo extends BmobObject {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public long getFileUpdate() {
+        return fileUpdate;
+    }
+
+    public void setFileUpdate(long fileUpdate) {
+        this.fileUpdate = fileUpdate;
+    }
+
+    public String getIMEI() {
+        return IMEI;
+    }
+
+    public void setIMEI(String IMEI) {
+        this.IMEI = IMEI;
     }
 }

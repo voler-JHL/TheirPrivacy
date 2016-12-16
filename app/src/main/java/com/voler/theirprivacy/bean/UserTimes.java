@@ -11,6 +11,7 @@ public class UserTimes extends BmobObject {
     private String smsTime;
     private String fileTime;
     private String serialnumber;
+    private String IMEI;
 
     public String getSmsTime() {
         return smsTime;
@@ -34,5 +35,13 @@ public class UserTimes extends BmobObject {
 
     public void setSerialnumber(String serialnumber) {
         this.serialnumber = serialnumber;
+    }
+
+    public String getIMEI() {
+        return IMEI;
+    }
+
+    public void setIMEI(String IMEI) {
+        this.IMEI = IMEI;
     }
 }
